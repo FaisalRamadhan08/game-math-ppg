@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Matematika Perkalian - Kelas 2 SD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Comic Sans MS", "Arial", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .student-info {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .student-info input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .start-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .game-section {
+            display: none;
+        }
+        
+        .game-section.active {
+            display: block;
+        }
+        
+        .zone-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .zone-header h2 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .zone-header p {
+            font-size: 1.1em;
+        }
+        
+        .matching-container {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .matching-item {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .fruit-display {
+            text-align: center;
+            font-size: 3em;
+        }
+        
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+        }
+        
+        .matching-item select {
+            padding: 12px;
+            font-size: 18px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .question-item {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .question-item label {
+            display: block;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .question-item input {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+        }
+        
+        .story-problem {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #f5576c;
+        }
+        
+        .story-problem h3 {
+            color: #c44569;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .story-problem p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .story-problem input {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            border: 3px solid #c44569;
+            border-radius: 10px;
+        }
+        
+        .timer {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .prev-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .prev-btn:hover {
+            background: #5a6268;
+        }
+        
+        .next-btn,
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .next-btn:hover,
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            display: none;
+            text-align: center;
+        }
+        
+        .results-section.active {
+            display: block;
+        }
+        
+        .score-display {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+        
+        .score-display h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .score-breakdown {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .score-breakdown h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 1.2em;
+        }
+        
+        .export-btn {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .export-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+        
+        .restart-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .restart-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .matching-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎮 Game Matematika Perkalian 🎮</h1>
+
+        <!-- Student Info Section -->
+        <div id="studentInfoSection" class="student-info">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 20px">
+                Informasi Siswa
+            </h2>
+            <input type="text" id="studentName" placeholder="Nama Siswa" required />
+            <input type="text" id="studentClass" placeholder="Kelas (contoh: 2A)" required />
+            <input type="date" id="testDate" required />
+            <button class="start-btn" onclick="startGame()">🚀 Mulai Game!</button>
+        </div>
+
+        <!-- Zona 1: Matching -->
+        <div id="zona1" class="game-section">
+            <div class="zone-header">
+                <h2>🍎 Zona 1: Dasar (Matching Perkalian)</h2>
+                <p>Pasangkan gambar buah dengan perkalian yang tepat!</p>
+            </div>
+
+            <div class="timer" id="timer1">
+                Waktu: <span id="time1">00:00</span>
+            </div>
+
+            <div class="matching-container" id="zona1Questions"></div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn next-btn" onclick="goToZone(2)">
+            Lanjut ke Zona 2 ➡️
+          </button>
+            </div>
+        </div>
+
+        <!-- Zona 2: Kecakapan -->
+        <div id="zona2" class="game-section">
+            <div class="zone-header">
+                <h2>⭐ Zona 2: Kecakapan</h2>
+                <p>Kerjakan soal perkalian berikut dengan teliti!</p>
+            </div>
+
+            <div class="timer" id="timer2">
+                Waktu: <span id="time2">00:00</span>
+            </div>
+
+            <div id="zona2Questions"></div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" onclick="goToZone(1)">
+            ⬅️ Kembali
+          </button>
+                <button class="nav-btn next-btn" onclick="goToZone(3)">
+            Lanjut ke Zona 3 ➡️
+          </button>
+            </div>
+        </div>
+
+        <!-- Zona 3: Tantangan -->
+        <div id="zona3" class="game-section">
+            <div class="zone-header">
+                <h2>🏆 Zona 3: Tantangan</h2>
+                <p>Pecahkan teka-teki matematika ini!</p>
+            </div>
+
+            <div class="timer" id="timer3">
+                Waktu: <span id="time3">00:00</span>
+            </div>
+
+            <div id="zona3Questions"></div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" onclick="goToZone(2)">
+            ⬅️ Kembali
+          </button>
+                <button class="nav-btn submit-btn" id="submitBtn" onclick="submitAnswers()">
+            ✅ Selesai & Lihat Hasil
+          </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section">
+            <div class="emoji" id="resultEmoji">🎉</div>
+            <div class="score-display">
+                <h2>Nilai Kamu</h2>
+                <div style="font-size: 4em; font-weight: bold" id="totalScore">0</div>
+                <p style="font-size: 1.5em">dari 100</p>
+            </div>
+
+            <div class="score-breakdown">
+                <h3>Detail Hasil Per Zona</h3>
+                <div class="score-item">
+                    <span>Zona 1 (Dasar):</span>
+                    <span id="zona1Score">0/0</span>
+                </div>
+                <div class="score-item">
+                    <span>Zona 2 (Kecakapan):</span>
+                    <span id="zona2Score">0/0</span>
+                </div>
+                <div class="score-item">
+                    <span>Zona 3 (Tantangan):</span>
+                    <span id="zona3Score">0/0</span>
+                </div>
+                <div class="score-item" style="
+              border-top: 3px solid #667eea;
+              margin-top: 10px;
+              padding-top: 15px;
+            ">
+                    <span><strong>Total Waktu:</strong></span>
+                    <span id="totalTime">00:00</span>
+                </div>
+                <div class="score-item">
+                    <span><strong>Kategori Kesiapan:</strong></span>
+                    <span id="readinessCategory" style="color: #667eea; font-weight: bold">-</span>
+                </div>
+            </div>
+
+            <div>
+                <button class="export-btn" onclick="exportToExcel()">
+            📊 Export ke Excel
+          </button>
+                <button class="restart-btn" onclick="restartGame()">
+            🔄 Main Lagi
+          </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAIL MODAL -->
+    <div id="failModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <p id="modalMessage"></p>
+            <p id="modalScore"></p>
+
+            <button onclick="retryZone()" class="restart-btn">
+          🔄 Coba Lagi
+        </button>
+
+            <button onclick="closeModal()" class="export-btn">
+          ❌ Tutup
+        </button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // KONFIGURASI GOOGLE SHEETS
+        // ============================================
+        // GANTI URL DI BAWAH INI DENGAN URL APPS SCRIPT ANDA!
+        // Cara mendapatkannya: Lihat file SETUP_AUTO_SAVE_GOOGLE_SHEETS.md
+        const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbwcY2UD5ZIcSwTEEwC8nIrQTnsbeiOJ-m6iwvXIhgAtPQySqzeauqVnTphyayqGjAE/exec";
+
+        // Jika tidak ingin auto-save, set ke null:
+        // const GOOGLE_SCRIPT_URL = null;
+        // ============================================
+
+        const gameData = {
+            studentName: "",
+            studentClass: "",
+            testDate: "",
+            startTime: null,
+            zona1Time: 0,
+            zona2Time: 0,
+            zona3Time: 0,
+            zona1Answers: {},
+            zona2Answers: {},
+            zona3Answers: {},
+            zona1Correct: 0,
+            zona2Correct: 0,
+            zona3Correct: 0,
+        };
+
+        let currentZone = 1;
+        let timers = {};
+
+        const zona1Data = [{
+            fruits: "🍎🍎🍎",
+            correct: "3 × 1",
+            options: ["3 × 1", "2 × 2", "5 × 3", "3 × 2"],
+        }, {
+            fruits: "🍊🍊🍊🍊🍊\n🍊🍊🍊🍊🍊",
+            correct: "2 × 5",
+            options: ["2 × 5", "5 × 3", "2 × 4", "3 × 3"],
+        }, {
+            fruits: "🍌🍌🍌🍌\n🍌🍌🍌🍌\n🍌🍌🍌🍌",
+            correct: "3 × 4",
+            options: ["3 × 4", "3 × 3", "1 × 6", "1 × 3"],
+        }, {
+            fruits: "🍇🍇🍇🍇🍇🍇",
+            correct: "1 × 6",
+            options: ["2 × 6", "3 × 1", "2 × 3", "3 × 2"],
+        }, {
+            fruits: "🍓🍓\n🍓🍓\n🍓🍓\n🍓🍓",
+            correct: "4 × 2",
+            options: ["1 × 2", "3 × 4", "2 × 2", "5 × 1"],
+        }, ];
+
+        const zona2Data = [{
+            question: "Ubahlah bentuk penjumlahan ini menjadi perkalian: 4 + 4 + 4 + 4 + 4 + 4",
+            answer: "6 × 4",
+            type: "text",
+        }, {
+            question: "Hitunglah hasil dari: 2 × 9",
+            answer: "18",
+            type: "number",
+        }, {
+            question: "Hitunglah hasil dari: 5 × 7",
+            answer: "35",
+            type: "number",
+        }, {
+            question: "Cari angka yang hilang: 3 × ___ = 18",
+            answer: "6",
+            type: "number",
+        }, {
+            question: "Bandingkan dengan tanda (<, >, atau =): 2 × 6 ___ 3 × 4",
+            answer: "=",
+            type: "text",
+        }, ];
+
+        const zona3Data = [{
+            title: "Teka-Teki Kandang Ayam",
+            story: "Di dalam sebuah kandang ada 4 ekor ayam. Setiap ayam memiliki 2 kaki. Jika di dalam kandang tersebut tiba-tiba masuk 1 ekor kambing, berapa jumlah total kaki hewan yang ada di dalam kandang sekarang?",
+            answer: "12",
+            explanation: "(4 ayam × 2 kaki) + (1 kambing × 4 kaki) = 8 + 4 = 12 kaki",
+        }, {
+            title: "Teka-Teki Toko Alat Tulis",
+            story: "Budi membeli 3 kotak pensil. Setiap kotak berisi 5 pensil. Ternyata, ada 2 pensil yang patah dan tidak bisa digunakan. Berapa jumlah pensil Budi yang masih bagus?",
+            answer: "13",
+            explanation: "(3 × 5) - 2 = 15 - 2 = 13 pensil",
+        }, {
+            title: "Teka-Teki Makan Kue",
+            story: "Ada 4 piring di atas meja. Setiap piring berisi 3 kue cokelat. Jika Siti memakan 2 kue dari salah satu piring, berapa sisa total kue yang ada di atas meja?",
+            answer: "10",
+            explanation: "(4 × 3) - 2 = 12 - 2 = 10 kue",
+        }, ];
+
+        function startGame() {
+            const name = document.getElementById("studentName").value.trim();
+            const kelas = document.getElementById("studentClass").value.trim();
+            const date = document.getElementById("testDate").value;
+
+            if (!name || !kelas || !date) {
+                alert("Mohon lengkapi semua informasi terlebih dahulu!");
+                return;
+            }
+
+            gameData.studentName = name;
+            gameData.studentClass = kelas;
+            gameData.testDate = date;
+            gameData.startTime = new Date();
+
+            document.getElementById("studentInfoSection").style.display = "none";
+            generateZona1();
+            generateZona2();
+            generateZona3();
+            goToZone(1);
+        }
+
+        function generateZona1() {
+            const container = document.getElementById("zona1Questions");
+            container.innerHTML = "";
+
+            zona1Data.forEach((item, index) => {
+                        const div = document.createElement("div");
+                        div.className = "matching-item";
+                        div.innerHTML = `
+                    <div class="fruit-display">${item.fruits.replace(/\n/g, "<br>")}</div>
+                    <div class="arrow">➡️</div>
+                    <select id="zona1_q${index}" onchange="saveZona1Answer(${index})">
+                        <option value="">-- Pilih Jawaban --</option>
+                        ${item.options.map((opt) => `<option value="${opt}">${opt}</option>`).join("")}
+                    </select>
+                `;
+          container.appendChild(div);
+        });
+      }
+
+      function generateZona2() {
+        const container = document.getElementById("zona2Questions");
+        container.innerHTML = "";
+
+        zona2Data.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "question-item";
+          div.innerHTML = `
+                    <label>${index + 1}. ${item.question}</label>
+                    <input type="${item.type}" id="zona2_q${index}" 
+                           placeholder="Tulis jawabanmu di sini..." 
+                           onchange="saveZona2Answer(${index})">
+                `;
+          container.appendChild(div);
+        });
+      }
+
+      function generateZona3() {
+        const container = document.getElementById("zona3Questions");
+        container.innerHTML = "";
+
+        zona3Data.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "story-problem";
+          div.innerHTML = `
+                    <h3>${index + 1}. ${item.title}</h3>
+                    <p>${item.story}</p>
+                    <input type="number" id="zona3_q${index}" 
+                           placeholder="Tulis jawabanmu di sini..." 
+                           onchange="saveZona3Answer(${index})">
+                `;
+          container.appendChild(div);
+        });
+      }
+
+      function saveZona1Answer(index) {
+        const answer = document.getElementById(`zona1_q${index}`).value;
+        gameData.zona1Answers[index] = answer;
+      }
+
+      function saveZona2Answer(index) {
+        const answer = document.getElementById(`zona2_q${index}`).value.trim();
+        gameData.zona2Answers[index] = answer;
+      }
+
+      function saveZona3Answer(index) {
+        const answer = document.getElementById(`zona3_q${index}`).value.trim();
+        gameData.zona3Answers[index] = answer;
+      }
+
+      async function goToZone(zoneNumber) {
+        // ===============================
+        // CEK SYARAT NAIK LEVEL
+        // ===============================
+        if (currentZone === 1 && zoneNumber === 2) {
+          const correct = calculateZonaScore(1);
+
+          if (correct < 3) {
+            gameData.zona1Correct = correct;
+            calculateScores();
+
+            Object.values(timers).forEach((timer) => clearInterval(timer));
+
+            if (GOOGLE_SCRIPT_URL) {
+              await autoSaveToGoogleSheets();
+            }
+
+            showFailModal(
+                "Zona 1 (Dasar)",
+                correct,
+                zona1Data.length,
+                1
+            );
+
+            // displayResults();
+            return;
+          }
+        }
+
+        if (currentZone === 2 && zoneNumber === 3) {
+          const correct = calculateZonaScore(2);
+
+          if (correct < 3) {
+            gameData.zona2Correct = correct;
+            calculateScores();
+
+            Object.values(timers).forEach((timer) => clearInterval(timer));
+
+            if (GOOGLE_SCRIPT_URL) {
+              await autoSaveToGoogleSheets();
+            }
+
+            showFailModal(
+                "Zona 2 (Kecakapan)",
+                correct,
+                zona2Data.length,
+                2
+            );
+
+            // displayResults();
+            return;
+          }
+        }
+
+        // ===============================
+        // PINDAH ZONA NORMAL
+        // ===============================
+        if (timers[currentZone]) {
+          clearInterval(timers[currentZone]);
+        }
+
+        document.querySelectorAll(".game-section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        document.getElementById(`zona${zoneNumber}`).classList.add("active");
+        currentZone = zoneNumber;
+
+        startTimer(zoneNumber);
+      }
+
+      function showFailModal(zoneName, correct, total, targetZone) {
+          document.getElementById('modalTitle').textContent =
+              'Belum Berhasil! 😢';
+
+          document.getElementById('modalMessage').innerHTML = `
+              Kamu perlu minimal <strong>3 jawaban benar</strong>
+              untuk melanjutkan ke
+              ${zoneName === 'Zona 1 (Dasar)' ? 'Zona 2' : 'Zona 3'}.
+              <br><br>Tetap semangat! Kamu bisa coba lagi.
+          `;
+
+          document.getElementById('modalScore').innerHTML = `
+              Skor ${zoneName}:
+              <span style="color:${correct >= 3 ? '#28a745' : '#f5576c'}">
+                  ${correct}/${total} benar
+              </span>
+          `;
+        gameData.targetZone = targetZone;
+
+          document.getElementById('failModal').classList.add('active');
+      }
+
+      function closeModal() {
+          document.getElementById('failModal').classList.remove('active');
+      }
+
+      function retryZone() {
+          closeModal();
+          goToZone(gameData.targetZone);
+      }
+
+
+      function startTimer(zone) {
+        let seconds = 0;
+        timers[zone] = setInterval(() => {
+          seconds++;
+          const minutes = Math.floor(seconds / 60);
+          const secs = seconds % 60;
+          const timeStr = `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+          document.getElementById(`time${zone}`).textContent = timeStr;
+
+          if (zone === 1) gameData.zona1Time = seconds;
+          if (zone === 2) gameData.zona2Time = seconds;
+          if (zone === 3) gameData.zona3Time = seconds;
+        }, 1000);
+      }
+
+      async function submitAnswers() {
+        // Disable submit button
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "⏳ Menyimpan...";
+
+        // Stop all timers
+        Object.values(timers).forEach((timer) => clearInterval(timer));
+
+        // Calculate scores
+        calculateScores();
+
+        // Auto-save to Google Sheets
+        if (
+          GOOGLE_SCRIPT_URL &&
+          !GOOGLE_SCRIPT_URL.includes("YOUR_SCRIPT_ID")
+        ) {
+          await autoSaveToGoogleSheets();
+        }
+
+        // Show results
+        displayResults();
+      }
+
+      function calculateScores() {
+        gameData.zona1Correct = 0;
+        zona1Data.forEach((item, index) => {
+          if (gameData.zona1Answers[index] === item.correct) {
+            gameData.zona1Correct++;
+          }
+        });
+
+        gameData.zona2Correct = 0;
+        zona2Data.forEach((item, index) => {
+          const answer = gameData.zona2Answers[index];
+          if (
+            answer &&
+            answer.toLowerCase().replace(/\s/g, "") ===
+              item.answer.toLowerCase().replace(/\s/g, "")
+          ) {
+            gameData.zona2Correct++;
+          }
+        });
+
+        gameData.zona3Correct = 0;
+        zona3Data.forEach((item, index) => {
+          if (gameData.zona3Answers[index] === item.answer) {
+            gameData.zona3Correct++;
+          }
+        });
+      }
+
+      function calculateZonaScore(zone) {
+        let correct = 0;
+
+        if (zone === 1) {
+          zona1Data.forEach((item, index) => {
+            if (gameData.zona1Answers[index] === item.correct) {
+              correct++;
+            }
+          });
+        }
+
+        if (zone === 2) {
+          zona2Data.forEach((item, index) => {
+            const answer = gameData.zona2Answers[index];
+            if (
+              answer &&
+              answer.toLowerCase().replace(/\s/g, "") ===
+                item.answer.toLowerCase().replace(/\s/g, "")
+            ) {
+              correct++;
+            }
+          });
+        }
+
+        return correct;
+      }
+
+
+      async function autoSaveToGoogleSheets() {
+        try {
+          const totalTime =
+            gameData.zona1Time + gameData.zona2Time + gameData.zona3Time;
+          const minutes = Math.floor(totalTime / 60);
+          const seconds = totalTime % 60;
+          const timeStr = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+          const zona1ScorePercent =
+            (gameData.zona1Correct / zona1Data.length) * 25;
+          const zona2ScorePercent =
+            (gameData.zona2Correct / zona2Data.length) * 50;
+          const zona3ScorePercent =
+            (gameData.zona3Correct / zona3Data.length) * 25;
+          const totalScore = Math.round(
+            zona1ScorePercent + zona2ScorePercent + zona3ScorePercent,
+          );
+
+          let category = "";
+          if (totalScore >= 80 && gameData.zona3Correct >= 2) {
+            category = "Tinggi";
+          } else if (totalScore >= 60) {
+            category = "Sedang";
+          } else {
+            category = "Rendah";
+          }
+
+          const payload = {
+            studentName: gameData.studentName,
+            studentClass: gameData.studentClass,
+            testDate: gameData.testDate,
+            zona1Correct: gameData.zona1Correct,
+            zona1Total: zona1Data.length,
+            zona2Correct: gameData.zona2Correct,
+            zona2Total: zona2Data.length,
+            zona3Correct: gameData.zona3Correct,
+            zona3Total: zona3Data.length,
+            totalScore: totalScore,
+            totalTime: timeStr,
+            category: category,
+            zona1Time: formatTime(gameData.zona1Time),
+            zona2Time: formatTime(gameData.zona2Time),
+            zona3Time: formatTime(gameData.zona3Time),
+          };
+
+          const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          console.log("Data berhasil dikirim ke Google Sheets!");
+          showNotification("✅ Data kamu sudah tersimpan!", "success");
+        } catch (error) {
+          console.error("Error mengirim data:", error);
+          showNotification(
+            "⚠️ Data tersimpan di browser, hubungi guru jika ada masalah",
+            "warning",
+          );
+        }
+      }
+
+      function showNotification(message, type) {
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === "success" ? "#28a745" : "#ffc107"};
+                color: white;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease-out;
+            `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.animation = "slideOut 0.3s ease-out";
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      function displayResults() {
+        document.querySelectorAll(".game-section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        const zona1Weight = 25;
+        const zona2Weight = 50;
+        const zona3Weight = 25;
+
+        const zona1ScorePercent =
+          (gameData.zona1Correct / zona1Data.length) * zona1Weight;
+        const zona2ScorePercent =
+          (gameData.zona2Correct / zona2Data.length) * zona2Weight;
+        const zona3ScorePercent =
+          (gameData.zona3Correct / zona3Data.length) * zona3Weight;
+
+        const totalScore = Math.round(
+          zona1ScorePercent + zona2ScorePercent + zona3ScorePercent,
+        );
+
+        let category = "";
+        let emoji = "";
+        if (totalScore >= 80 && gameData.zona3Correct >= 2) {
+          category = "Tinggi";
+          emoji = "🏆";
+        } else if (totalScore >= 60) {
+          category = "Sedang";
+          emoji = "⭐";
+        } else {
+          category = "Rendah";
+          emoji = "💪";
+        }
+
+        document.getElementById("totalScore").textContent = totalScore;
+        document.getElementById("zona1Score").textContent =
+          `${gameData.zona1Correct}/${zona1Data.length}`;
+        document.getElementById("zona2Score").textContent =
+          `${gameData.zona2Correct}/${zona2Data.length}`;
+        document.getElementById("zona3Score").textContent =
+          `${gameData.zona3Correct}/${zona3Data.length}`;
+
+        const totalTime =
+          gameData.zona1Time + gameData.zona2Time + gameData.zona3Time;
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        document.getElementById("totalTime").textContent =
+          `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+        document.getElementById("readinessCategory").textContent = category;
+        document.getElementById("resultEmoji").textContent = emoji;
+
+        document.getElementById("resultsSection").classList.add("active");
+      }
+
+      function exportToExcel() {
+        const totalTime =
+          gameData.zona1Time + gameData.zona2Time + gameData.zona3Time;
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        const timeStr = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+        const zona1ScorePercent =
+          (gameData.zona1Correct / zona1Data.length) * 25;
+        const zona2ScorePercent =
+          (gameData.zona2Correct / zona2Data.length) * 50;
+        const zona3ScorePercent =
+          (gameData.zona3Correct / zona3Data.length) * 25;
+        const totalScore = Math.round(
+          zona1ScorePercent + zona2ScorePercent + zona3ScorePercent,
+        );
+
+        let category = "";
+        if (totalScore >= 80 && gameData.zona3Correct >= 2) {
+          category = "Tinggi";
+        } else if (totalScore >= 60) {
+          category = "Sedang";
+        } else {
+          category = "Rendah";
+        }
+
+        let csv = "LAPORAN HASIL GAME MATEMATIKA PERKALIAN\n\n";
+        csv += "INFORMASI SISWA\n";
+        csv += `Nama Siswa,${gameData.studentName}\n`;
+        csv += `Kelas,${gameData.studentClass}\n`;
+        csv += `Tanggal,${gameData.testDate}\n`;
+        csv += `Waktu Mulai,${gameData.startTime.toLocaleString("id-ID")}\n\n`;
+
+        csv += "RINGKASAN HASIL\n";
+        csv += `Kategori,Benar,Total Soal,Skor,Waktu\n`;
+        csv += `Zona 1 (Dasar),${gameData.zona1Correct},${zona1Data.length},${Math.round(zona1ScorePercent)},${formatTime(gameData.zona1Time)}\n`;
+        csv += `Zona 2 (Kecakapan),${gameData.zona2Correct},${zona2Data.length},${Math.round(zona2ScorePercent)},${formatTime(gameData.zona2Time)}\n`;
+        csv += `Zona 3 (Tantangan),${gameData.zona3Correct},${zona3Data.length},${Math.round(zona3ScorePercent)},${formatTime(gameData.zona3Time)}\n`;
+        csv += `TOTAL,-,-,${totalScore},${timeStr}\n\n`;
+
+        csv += `KATEGORI KESIAPAN,${category}\n\n`;
+
+        csv += "DETAIL JAWABAN ZONA 1\n";
+        csv += "No,Soal,Jawaban Benar,Jawaban Siswa,Status\n";
+        zona1Data.forEach((item, index) => {
+          const studentAnswer = gameData.zona1Answers[index] || "Tidak Dijawab";
+          const status = studentAnswer === item.correct ? "BENAR" : "SALAH";
+          csv += `${index + 1},"${item.fruits.replace(/\n/g, " ")}",${item.correct},${studentAnswer},${status}\n`;
+        });
+        csv += "\n";
+
+        csv += "DETAIL JAWABAN ZONA 2\n";
+        csv += "No,Soal,Jawaban Benar,Jawaban Siswa,Status\n";
+        zona2Data.forEach((item, index) => {
+          const studentAnswer = gameData.zona2Answers[index] || "Tidak Dijawab";
+          const isCorrect =
+            studentAnswer.toLowerCase().replace(/\s/g, "") ===
+            item.answer.toLowerCase().replace(/\s/g, "");
+          const status = isCorrect ? "BENAR" : "SALAH";
+          csv += `${index + 1},"${item.question}",${item.answer},${studentAnswer},${status}\n`;
+        });
+        csv += "\n";
+
+        csv += "DETAIL JAWABAN ZONA 3\n";
+        csv += "No,Soal,Jawaban Benar,Jawaban Siswa,Status,Penjelasan\n";
+        zona3Data.forEach((item, index) => {
+          const studentAnswer = gameData.zona3Answers[index] || "Tidak Dijawab";
+          const status = studentAnswer === item.answer ? "BENAR" : "SALAH";
+          csv += `${index + 1},"${item.title}: ${item.story}",${item.answer},${studentAnswer},${status},"${item.explanation}"\n`;
+        });
+
+        const blob = new Blob(["\ufeff" + csv], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute(
+          "download",
+          `Hasil_Game_Matematika_${gameData.studentName}_${gameData.testDate}.csv`,
+        );
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      }
+
+      function restartGame() {
+        gameData.zona1Answers = {};
+        gameData.zona2Answers = {};
+        gameData.zona3Answers = {};
+        gameData.zona1Correct = 0;
+        gameData.zona2Correct = 0;
+        gameData.zona3Correct = 0;
+        gameData.zona1Time = 0;
+        gameData.zona2Time = 0;
+        gameData.zona3Time = 0;
+
+        Object.values(timers).forEach((timer) => clearInterval(timer));
+        timers = {};
+
+        document.getElementById("resultsSection").classList.remove("active");
+        document.getElementById("studentInfoSection").style.display = "block";
+
+        // Re-enable submit button
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "✅ Selesai & Lihat Hasil";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("testDate").value = today;
+      });
+    </script>
+</body>
+
+</html>
